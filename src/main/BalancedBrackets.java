@@ -23,10 +23,23 @@ public class BalancedBrackets {
      */
     public static boolean hasBalancedBrackets(String str) {
         int brackets = 0;
+        int indexOpening = str.indexOf("[");
+        int indexClosing = str.indexOf("]");
+
+        if (str == null) {
+            throw new NullPointerException("Cannot be null");
+        }
+
+        if (indexClosing < indexOpening) {
+            return false;
+        }
+
         for (char ch : str.toCharArray()) {
             if (ch == '[') {
                 brackets++;
-            } else if (ch == ']') {
+            } else if (brackets > 1) {
+                break;
+            }  else if (ch == ']') {
                 brackets--;
             }
         }
